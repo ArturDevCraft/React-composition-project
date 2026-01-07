@@ -1,12 +1,23 @@
 import CalendarApi from './calendarApi';
 
+export function submitMeeting(e, fields, data) {
+	const api = new CalendarApi();
+	e.preventDefault();
+	const errors = validate(e, fields);
+	if (errors === null) {
+		api.add(data);
+		e.target.reset();
+	}
+	return errors;
+}
+
 function validate(e, fields) {
 	e.preventDefault();
 	const errors = [];
 
 	fields.forEach((field) => {
 		const value = e.target[field.name].value;
-		const label = e.target[field.name].labels[0].firstChild.textContent;
+		const label = e.target[field.name].placeholder;
 
 		if (field.required && !isNotEmpty(value)) {
 			errors.push(label + ' jest puste');
@@ -19,7 +30,7 @@ function validate(e, fields) {
 	if (errors.length > 0) {
 		return errors;
 	}
-	return true;
+	return null;
 }
 
 function isNotEmpty(string = null) {
