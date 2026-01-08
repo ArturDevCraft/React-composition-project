@@ -8,7 +8,7 @@ export function submitMeeting(e, fields, data) {
 		api.add(data);
 		e.target.reset();
 	}
-	return errors;
+	this.setState({ errors: errors });
 }
 
 function validate(e, fields) {
@@ -20,10 +20,16 @@ function validate(e, fields) {
 		const label = e.target[field.name].placeholder;
 
 		if (field.required && !isNotEmpty(value)) {
-			errors.push(label + ' jest puste');
-		} else if (field.pattern) {
-			!checkPattern(field.pattern, value) &&
-				errors.push(label + ' ma niewłaściwy format');
+			errors.push({
+				field: field.name,
+				message: 'Pole: ' + label + ' jest puste',
+			});
+		} else if (field.regex) {
+			!checkPattern(field.regex, value) &&
+				errors.push({
+					field: field.name,
+					message: 'Pole: ' + label + ' ma niewłaściwy format',
+				});
 		}
 	});
 

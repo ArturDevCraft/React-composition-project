@@ -2,11 +2,12 @@ import React from 'react';
 import CalendarForm from './CalendarForm';
 import CalendarList from './CalendarList';
 import { submitMeeting } from '../providers/calendarProvider';
+import Errors from './Errors';
 
 class Calendar extends React.Component {
 	formFields = [
-		{ name: 'firstName', label: 'Imię', regex: '/.{2,20}/' },
-		{ name: 'lastName', label: 'Nazwisko', regex: '/.{2,20}/' },
+		{ name: 'firstName', label: 'Imię', regex: '/.{2,20}/', required: true },
+		{ name: 'lastName', label: 'Nazwisko', regex: '/.{2,20}/', required: true },
 		{
 			name: 'email',
 			label: 'E-mail',
@@ -29,10 +30,18 @@ class Calendar extends React.Component {
 			required: true,
 		},
 	];
+	state = { errors: [] };
 	render() {
+		const { errors } = this.state;
 		return (
 			<>
-				<CalendarForm fields={this.formFields} submitHandler={submitMeeting} />
+				{' '}
+				{errors.length > 0 && <Errors errors={errors} />}
+				<CalendarForm
+					fields={this.formFields}
+					submitHandler={submitMeeting.bind(this)}
+					errors={errors}
+				/>
 				<CalendarList />
 			</>
 		);
