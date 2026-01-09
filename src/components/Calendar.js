@@ -32,7 +32,7 @@ class Calendar extends React.Component {
 	];
 	state = { errors: [], meetings: [], formKey: Math.random() };
 	componentDidMount() {
-		// loadMeetingsList().bind(this);
+		loadMeetingsList(this);
 	}
 	render() {
 		const { errors, meetings, formKey } = this.state;
@@ -46,7 +46,7 @@ class Calendar extends React.Component {
 					submitHandler={submitMeeting.bind(this)}
 					errors={errors}
 				/>
-				<CalendarList meeteings={meetings} />
+				<CalendarList meetings={meetings} />
 			</>
 		);
 	}

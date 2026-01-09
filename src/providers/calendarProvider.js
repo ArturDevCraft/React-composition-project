@@ -16,10 +16,10 @@ export async function submitMeeting(e, fields, data) {
 	}
 }
 
-export async function loadMeetingsList() {
+export async function loadMeetingsList(component) {
 	try {
 		const meetingsList = await api.get();
-		this.setState({ meetings: meetingsList });
+		component.setState({ meetings: meetingsList });
 	} catch (err) {
 		alert(err);
 	}
