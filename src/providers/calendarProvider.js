@@ -1,14 +1,28 @@
 import CalendarApi from './calendarApi';
+const api = new CalendarApi();
 
-export function submitMeeting(e, fields, data) {
-	const api = new CalendarApi();
+export async function submitMeeting(e, fields, data) {
 	e.preventDefault();
 	const errors = validate(e, fields);
 	if (errors === null) {
-		api.add(data);
-		e.target.reset();
+		this.setState({ errors: [], formKey: Math.random() });
+		try {
+			await api.add(data);
+		} catch (err) {
+			alert(err);
+		}
+	} else {
+		this.setState({ errors: errors });
 	}
-	this.setState({ errors: errors });
+}
+
+export async function loadMeetingsList() {
+	try {
+		const meetingsList = await api.get();
+		this.setState({ meetings: meetingsList });
+	} catch (err) {
+		alert(err);
+	}
 }
 
 function validate(e, fields) {

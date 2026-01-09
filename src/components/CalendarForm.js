@@ -30,7 +30,7 @@ const CalendarForm = ({ fields, submitHandler, errors }) => {
 					placeholder={field.label}
 					value={fieldValues[field.name]}
 					onChange={inputChange}
-					className={hasErrors(field.name) && 'error'}
+					className={hasErrors(field.name) ? 'error' : ''}
 				></input>
 			))}
 			<input type="submit" value="Dodaj" />

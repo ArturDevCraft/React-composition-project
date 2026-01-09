@@ -1,13 +1,13 @@
 import React from 'react';
 import CalendarForm from './CalendarForm';
 import CalendarList from './CalendarList';
-import { submitMeeting } from '../providers/calendarProvider';
+import { submitMeeting, loadMeetingsList } from '../providers/calendarProvider';
 import Errors from './Errors';
 
 class Calendar extends React.Component {
 	formFields = [
-		{ name: 'firstName', label: 'Imię', regex: '/.{2,20}/', required: true },
-		{ name: 'lastName', label: 'Nazwisko', regex: '/.{2,20}/', required: true },
+		{ name: 'firstName', label: 'Imię', regex: /.{2,20}/, required: true },
+		{ name: 'lastName', label: 'Nazwisko', regex: /.{2,20}/, required: true },
 		{
 			name: 'email',
 			label: 'E-mail',
@@ -26,23 +26,27 @@ class Calendar extends React.Component {
 			name: 'time',
 			label: 'Godzina',
 			type: 'time',
-			regex: /^(?:[0-9]|0\d|2[0-3]):[0-5]\d$/,
+			regex: /^(?:[0-9]|0\d|2[0-3]|1\d):[0-5]\d$/,
 			required: true,
 		},
 	];
-	state = { errors: [] };
+	state = { errors: [], meetings: [], formKey: Math.random() };
+	componentDidMount() {
+		// loadMeetingsList().bind(this);
+	}
 	render() {
-		const { errors } = this.state;
+		const { errors, meetings, formKey } = this.state;
 		return (
 			<>
 				{' '}
 				{errors.length > 0 && <Errors errors={errors} />}
 				<CalendarForm
+					key={formKey}
 					fields={this.formFields}
 					submitHandler={submitMeeting.bind(this)}
 					errors={errors}
 				/>
-				<CalendarList />
+				<CalendarList meeteings={meetings} />
 			</>
 		);
 	}
