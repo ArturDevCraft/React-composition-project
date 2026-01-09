@@ -16,11 +16,41 @@
 
 - problem z resetowaniem pól formularza calendarForm
   ROZWIĄZANIE: do danie dla komponentu calendarForm key i zmienianie go zawsze kiedy dane zostaną prawidlowo dodane
-  `fragment kodu`
 
 ```
-większy fragment kodu
+<CalendarForm
+    key={formKey}
+    fields={this.formFields}
+    submitHandler={submitMeeting.bind(this)}
+    errors={errors}
+/>
+...
+this.setState({ errors: [], formKey: Math.random() });
 ```
+
+- problem z wywołaniem setState w zewnętrznym pliku calendarProvider:
+  w przypadku callback zastosowanie `bind(this)`:
+  ```
+  <CalendarForm
+    key={formKey}
+    fields={this.formFields}
+    submitHandler={submitMeeting.bind(this)}
+    errors={errors}
+  />
+  ```
+  w przypadku wywałania funkcji w kodzie, przekazanie this jako argument funkcji:
+  `loadMeetingsList(this);`
+  ...
+  ```
+  export async function loadMeetingsList(component) {
+        try {
+            const meetingsList = await api.get();
+            component.setState({ meetings: meetingsList });
+            ...
+        }
+        ...
+  }
+  ```
 
 ### materiały, które pomogły Ci uzyskać dany efekt
 
