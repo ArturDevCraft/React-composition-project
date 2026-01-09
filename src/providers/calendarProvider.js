@@ -7,7 +7,8 @@ export async function submitMeeting(e, fields, data) {
 	if (errors === null) {
 		this.setState({ errors: [], formKey: Math.random() });
 		try {
-			await api.add(data);
+			const newMeeting = await api.add(data);
+			updateMeetingsState(this, 'add', newMeeting);
 		} catch (err) {
 			alert(err);
 		}
@@ -22,6 +23,14 @@ export async function loadMeetingsList(component) {
 		component.setState({ meetings: meetingsList });
 	} catch (err) {
 		alert(err);
+	}
+}
+
+function updateMeetingsState(component, operation, data) {
+	if (operation === 'add') {
+		component.setState((state) => {
+			return { meetings: [...state.meetings, { ...data }] };
+		});
 	}
 }
 
