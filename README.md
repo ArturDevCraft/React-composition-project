@@ -1,70 +1,156 @@
-# Getting Started with Create React App
+### 🔥 Chcesz stworzyć własne repozytorium z projektem na podstawie repozytorium sforkowanego (np. oryginalnego repozytorium z zadaniem)? Zobacz, [jak to zrobić](https://github.com/devmentor-pl/from-fork-to-own-repo).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 💥 Nie wiesz, jak zabrać się do pisania? Przeczytaj [artykuł o tworzeniu README do projektu](https://devmentor.pl/b/jak-napisac-readme-do-projektu-na-githubie)!
 
-## Available Scripts
+&nbsp;
 
-In the project directory, you can run:
+---
 
-### `npm start`
+# SEKCJA NOTATEK - usuń po napisaniu README :)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### funkcjonalności programu
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-
 
-### `npm test`
+### problemy i ich rozwiązania + fragmenty kodu
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- problem z resetowaniem pól formularza calendarForm
+  ROZWIĄZANIE: do danie dla komponentu calendarForm key i zmienianie go zawsze kiedy dane zostaną prawidlowo dodane
+  `fragment kodu`
 
-### `npm run build`
+```
+większy fragment kodu
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### materiały, które pomogły Ci uzyskać dany efekt
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### reużywalne części projektu
 
-### `npm run eject`
+-
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### narzędzia, frameworki, biblioteki
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### niezbędne paczki i komendy do uruchomienia projektu
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-
 
-## Learn More
+### wtyczki – rozszerzenia do przeglądarki czy do IDE
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### inspiracje
 
-### Code Splitting
+-
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### wnioski, pomysły na rozwój projektu
 
-### Analyzing the Bundle Size
+-
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+&nbsp;
 
-### Making a Progressive Web App
+## _`Koniec sekcji notatek. Poniżej znajdziesz szablon właściwego README.`_
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+![screen or GIF of your app](https://via.placeholder.com/1000x300)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Project Name
 
-### Deployment
+See the live version of [Project Name](https://devmentor.pl).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1-3 sentences about the project...
 
-### `npm run build` fails to minify
+**Main features**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- one
+- two
+- three
+
+&nbsp;
+
+## 💡 Technologies
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+&nbsp;
+
+## 🔗 See also
+
+Are you interested in **techonologyName** and **technologyName**? See my other project [Interesting Project Name](https://devmentor.pl/podcast).
+
+&nbsp;
+
+## 💿 Installation
+
+The project uses [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/). Having them installed, type into the terminal: `npm i`.
+
+&nbsp;
+
+## 🤔 Solutions provided in the project
+
+- one
+
+&nbsp;
+
+- two:
+
+```
+some example code
+
+more code :)
+```
+
+&nbsp;
+
+- three
+
+| Issue | Solution             |     |
+| ----- | -------------------- | --- |
+| one   | `short code example` |     |
+| two   | `short code example` |     |
+| thre  | `short code example` |     |
+
+&nbsp;
+
+- four - some shortcut <kbd>Ctrl</kbd> + <kbd>C</kbd>
+
+&nbsp;
+
+- five - example with a screenshot
+  <img alt='what it is' src="https://via.placeholder.com/500x200" />
+
+&nbsp;
+
+## 💭 Conclusions for future projects
+
+I would like to improve...
+
+#### This is the first issue:
+
+```
+and this is a code example
+```
+
+#### This is the second issue:
+
+```
+and this is a code example
+```
+
+&nbsp;
+
+## 🙋‍♂️ Feel free to contact me
+
+Write sth nice ;) Find me on...
+
+&nbsp;
+
+## 👏 Thanks / Special thanks / Credits
+
+Thanks to my [Mentor - devmentor.pl](https://devmentor.pl/) – for providing me with this task and for code review.
