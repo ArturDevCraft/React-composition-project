@@ -42,7 +42,6 @@ body {
 
 .appointment-form__field-group {
 	flex: 1;
-	min-width: 180px;
 	position: relative;
 }
 
