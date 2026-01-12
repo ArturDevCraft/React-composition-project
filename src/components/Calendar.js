@@ -1,7 +1,11 @@
 import React from 'react';
 import CalendarForm from './CalendarForm';
 import CalendarList from './CalendarList';
-import { submitMeeting, loadMeetingsList } from '../providers/calendarProvider';
+import {
+	submitMeeting,
+	loadMeetingsList,
+	showHints,
+} from '../providers/calendarProvider';
 import Errors from './Errors';
 
 class Calendar extends React.Component {

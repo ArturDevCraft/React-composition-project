@@ -17,6 +17,18 @@ export async function submitMeeting(e, fields, data) {
 	}
 }
 
+export async function getFieldHints(field, like) {
+	try {
+		const data = await api.get();
+		const filtred = data.filter((item) =>
+			item[field].toLowerCase().includes(like.toLowerCase())
+		);
+		return filtred.map((item) => item[field]);
+	} catch (err) {
+		alert(err);
+	}
+}
+
 export async function loadMeetingsList(component) {
 	try {
 		const meetingsList = await api.get();

@@ -1,15 +1,30 @@
 import { useState } from 'react';
+import { getFieldHints } from '../providers/calendarProvider';
+import CalendarHints from './CalendarHints';
 
 const CalendarForm = ({ fields, submitHandler, errors }) => {
 	const initialValues = Object.fromEntries(
 		fields.map((field) => [field.name, ''])
 	);
+
+	const initialHints = Object.fromEntries(
+		fields.map((field) => [field.name, []])
+	);
 	const [fieldValues, setFieldValues] = useState(initialValues);
+	const [fieldHints, setFieldHints] = useState(initialHints);
 
 	const inputChange = (e) => {
 		const { name, value } = e.target;
-
 		setFieldValues((state) => ({ ...state, [name]: value }));
+		setHints(name, value);
+	};
+
+	const setHints = async (fieldName, value) => {
+		let hints = await getFieldHints(fieldName, value);
+		if (value == '') {
+			hints = [];
+		}
+		setFieldHints((state) => ({ ...state, [fieldName]: hints }));
 	};
 
 	const hasErrors = (fieldName) => {
@@ -20,19 +35,33 @@ const CalendarForm = ({ fields, submitHandler, errors }) => {
 		return false;
 	};
 
+	const useHint = (fieldName, value) => {
+		setFieldValues((state) => ({ ...state, [fieldName]: value }));
+		setFieldHints((state) => ({ ...state, [fieldName]: [] }));
+	};
+
 	return (
 		<form onSubmit={(e) => submitHandler(e, fields, fieldValues)}>
 			{fields.map((field) => (
-				<input
-					key={field.name}
-					type={field.type}
-					name={field.name}
-					placeholder={field.label}
-					value={fieldValues[field.name]}
-					onChange={inputChange}
-					className={hasErrors(field.name) ? 'error' : ''}
-				></input>
+				<>
+					<input
+						key={field.name}
+						type={field.type}
+						name={field.name}
+						placeholder={field.label}
+						value={fieldValues[field.name]}
+						onChange={inputChange}
+						className={hasErrors(field.name) ? 'error' : ''}
+						autoComplete="off"
+					></input>
+					<CalendarHints
+						hints={fieldHints[field.name]}
+						fieldName={field.name}
+						clickHandler={useHint}
+					/>
+				</>
 			))}
+
 			<input type="submit" value="Dodaj" />
 		</form>
 	);
