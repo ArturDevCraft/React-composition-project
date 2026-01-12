@@ -1,17 +1,20 @@
-const ConfirmationModal = ({ isOpen, onClose, onConfirm, title }) => {
+const ConfirmationModal = ({
+	isOpen,
+	onClose,
+	onConfirm,
+	title,
+	description,
+}) => {
 	if (!isOpen) return null;
 
 	return (
-		<div className={`modal ${isOpen ? 'modal--is-open' : ''}`}>
+		<div className="modal">
 			<div className="modal__overlay" onClick={onClose} />
 
 			<div className="modal__content">
 				<h3 className="modal__title">{title}</h3>
 
-				<p className="modal__description">
-					Czy na pewno chcesz usunąć ten element? Tej operacji nie da się
-					cofnąć.
-				</p>
+				<p className="modal__description">{description}</p>
 
 				<div className="modal__actions">
 					<button

@@ -221,14 +221,6 @@ body {
 	align-items: center;
 	justify-content: center;
 	z-index: 1000;
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.3s ease;
-}
-
-.modal--is-open {
-	opacity: 1;
-	visibility: visible;
 }
 
 .modal__overlay {
@@ -249,12 +241,6 @@ body {
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 	max-width: 400px;
 	width: 90%;
-	transform: translateY(20px);
-	transition: transform 0.3s ease;
-}
-
-.modal--is-open .modal__content {
-	transform: translateY(0);
 }
 
 .modal__title {
@@ -318,7 +304,6 @@ body {
 	animation: slideIn 0.3s ease-out;
 }
 
-/* Responsywność */
 @media (max-width: 768px) {
 	.appointment-form {
 		flex-direction: column;
@@ -328,7 +313,7 @@ body {
 		width: 100%;
 	}
 	.appointment-list__item {
-		grid-template-columns: 1fr 1fr; /* Na komórkach zostajemy przy 2 kolumnach */
+		grid-template-columns: 1fr 1fr;
 		gap: 12px;
 		padding: 20px;
 	}
@@ -336,7 +321,7 @@ body {
 		display: none;
 	}
 	.appointment-list__delete-btn {
-		grid-column: span 2; /* Przycisk zajmuje całą szerokość na dole wiersza */
+		grid-column: span 2;
 		width: 100%;
 		padding: 10px;
 		margin-top: 8px;

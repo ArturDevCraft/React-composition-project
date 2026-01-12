@@ -33,6 +33,8 @@ const CalendarList = ({ meetings, deleteHandler }) => {
 					onClose={() => setIsModalOpen(false)}
 					onConfirm={confirmModalHandler}
 					title="Potwierdzenie usunięcia"
+					description="Czy na pewno chcesz usunąć ten element? Tej operacji nie da się
+					cofnąć."
 				/>,
 				document.body
 			)}
