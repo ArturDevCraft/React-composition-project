@@ -17,6 +17,15 @@ export async function submitMeeting(e, fields, data) {
 	}
 }
 
+export async function deleteMeeting(id) {
+	try {
+		await api.delete(id);
+		updateMeetingsState(this, 'delete', id);
+	} catch (err) {
+		alert(err);
+	}
+}
+
 export async function getFieldHints(field, like) {
 	try {
 		const data = await api.get();
@@ -45,6 +54,14 @@ function updateMeetingsState(component, operation, data) {
 	if (operation === 'add') {
 		component.setState((state) => {
 			return { meetings: [...state.meetings, { ...data }] };
+		});
+	}
+
+	if (operation === 'delete') {
+		component.setState((state) => {
+			const newState = [...state.meetings];
+			const filtred = newState.filter((item) => item.id !== data);
+			return { meetings: [...filtred] };
 		});
 	}
 }

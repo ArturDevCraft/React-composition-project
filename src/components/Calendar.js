@@ -4,6 +4,7 @@ import CalendarList from './CalendarList';
 import {
 	submitMeeting,
 	loadMeetingsList,
+	deleteMeeting,
 	showHints,
 } from '../providers/calendarProvider';
 import Errors from './Errors';
@@ -50,7 +51,10 @@ class Calendar extends React.Component {
 					submitHandler={submitMeeting.bind(this)}
 					errors={errors}
 				/>
-				<CalendarList meetings={meetings} />
+				<CalendarList
+					meetings={meetings}
+					deleteHandler={deleteMeeting.bind(this)}
+				/>
 			</div>
 		);
 	}

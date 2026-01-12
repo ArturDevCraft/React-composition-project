@@ -1,7 +1,15 @@
-const CalendarItem = ({ id, firstName, lastName, email, date, time }) => {
+const CalendarItem = ({
+	id,
+	firstName,
+	lastName,
+	email,
+	date,
+	time,
+	clickHandler,
+}) => {
 	return (
 		<>
-			<li class="appointment-list__item appointment-list__item--header">
+			<li className="appointment-list__item appointment-list__item--header">
 				<span>Imię</span>
 				<span>Nazwisko</span>
 				<span>E-mail</span>
@@ -17,7 +25,13 @@ const CalendarItem = ({ id, firstName, lastName, email, date, time }) => {
 				<span className="appointment-list__data appointment-list__data--time">
 					{time}
 				</span>
-                <button class="appointment-list__delete-btn" aria-label="Usuń">Usuń</button>
+				<button
+					className="appointment-list__delete-btn"
+					aria-label="Usuń"
+					onClick={() => clickHandler(id)}
+				>
+					Usuń
+				</button>
 			</li>
 		</>
 	);
