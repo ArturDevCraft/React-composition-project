@@ -10,6 +10,7 @@ const CalendarForm = ({ fields, submitHandler, errors }) => {
 	const initialHints = Object.fromEntries(
 		fields.map((field) => [field.name, []])
 	);
+
 	const [fieldValues, setFieldValues] = useState(initialValues);
 	const [fieldHints, setFieldHints] = useState(initialHints);
 

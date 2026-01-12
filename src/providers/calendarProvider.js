@@ -20,10 +20,13 @@ export async function submitMeeting(e, fields, data) {
 export async function getFieldHints(field, like) {
 	try {
 		const data = await api.get();
-		const filtred = data.filter((item) =>
-			item[field].toLowerCase().includes(like.toLowerCase())
-		);
-		return filtred.map((item) => item[field]);
+		const uniqueData = new Set();
+		data.forEach((item) => {
+			if (item[field].toLowerCase().includes(like.toLowerCase())) {
+				uniqueData.add(item[field]);
+			}
+		});
+		return Array.from(uniqueData);
 	} catch (err) {
 		alert(err);
 	}
