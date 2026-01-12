@@ -30,11 +30,13 @@ export async function getFieldHints(field, like) {
 	try {
 		const data = await api.get();
 		const uniqueData = new Set();
+
 		data.forEach((item) => {
-			if (item[field].toLowerCase().includes(like.toLowerCase())) {
+			if (isValueLike(item[field], like)) {
 				uniqueData.add(item[field]);
 			}
 		});
+
 		return Array.from(uniqueData);
 	} catch (err) {
 		alert(err);
@@ -48,6 +50,10 @@ export async function loadMeetingsList(component) {
 	} catch (err) {
 		alert(err);
 	}
+}
+
+function isValueLike(value, like) {
+	return value.toLowerCase().includes(like.toLowerCase());
 }
 
 function updateMeetingsState(component, operation, data) {

@@ -11,6 +11,7 @@ const CalendarList = ({ meetings, deleteHandler }) => {
 		setIsModalOpen(true);
 		setSelectedId(id);
 	};
+
 	const confirmModalHandler = () => {
 		deleteHandler(selectedId);
 		setIsModalOpen(false);

@@ -1,13 +1,12 @@
 import React from 'react';
 import CalendarForm from './CalendarForm';
 import CalendarList from './CalendarList';
+import Errors from './Errors';
 import {
 	submitMeeting,
 	loadMeetingsList,
 	deleteMeeting,
-	showHints,
 } from '../providers/calendarProvider';
-import Errors from './Errors';
 
 class Calendar extends React.Component {
 	formFields = [
@@ -35,16 +34,18 @@ class Calendar extends React.Component {
 			required: true,
 		},
 	];
+
 	state = { errors: [], meetings: [], formKey: Math.random() };
+
 	componentDidMount() {
 		loadMeetingsList(this);
 	}
+
 	render() {
 		const { errors, meetings, formKey } = this.state;
 		return (
 			<div className="booking-app">
-				{' '}
-				{errors.length > 0 && <Errors errors={errors} />}
+				<Errors errors={errors} />
 				<CalendarForm
 					key={formKey}
 					fields={this.formFields}

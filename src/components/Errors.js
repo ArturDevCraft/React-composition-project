@@ -1,4 +1,5 @@
 export default function Errors({ errors }) {
+	if (errors.length <= 0) return null;
 	return (
 		<ul className="booking-app__error-list error-summary">
 			{errors.map((error) => {
@@ -7,7 +8,6 @@ export default function Errors({ errors }) {
 						className="error-summary__item"
 						key={'error-' + error.message + error.field}
 					>
-						{' '}
 						{error.message}
 					</li>
 				);
