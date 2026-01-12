@@ -41,10 +41,14 @@ const CalendarForm = ({ fields, submitHandler, errors }) => {
 		setFieldHints((state) => ({ ...state, [fieldName]: [] }));
 	};
 
+
 	return (
-		<form onSubmit={(e) => submitHandler(e, fields, fieldValues)}>
+		<form
+			onSubmit={(e) => submitHandler(e, fields, fieldValues)}
+			className="booking-app__form appointment-form"
+		>
 			{fields.map((field) => (
-				<>
+				<div className="appointment-form__field-group">
 					<input
 						key={field.name}
 						type={field.type}
@@ -52,7 +56,11 @@ const CalendarForm = ({ fields, submitHandler, errors }) => {
 						placeholder={field.label}
 						value={fieldValues[field.name]}
 						onChange={inputChange}
-						className={hasErrors(field.name) ? 'error' : ''}
+						className={
+							hasErrors(field.name)
+								? 'error appointment-form__input'
+								: 'appointment-form__input'
+						}
 						autoComplete="off"
 					></input>
 					<CalendarHints
@@ -60,10 +68,10 @@ const CalendarForm = ({ fields, submitHandler, errors }) => {
 						fieldName={field.name}
 						clickHandler={useHint}
 					/>
-				</>
+				</div>
 			))}
 
-			<input type="submit" value="Dodaj" />
+			<input type="submit" value="Dodaj" className="appointment-form__submit" />
 		</form>
 	);
 };

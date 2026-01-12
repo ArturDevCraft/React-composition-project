@@ -1,13 +1,258 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+	--primary: #4f46e5;
+	--primary-dark: #4338ca;
+	--bg: #f1f5f9;
+	--card: #ffffff;
+	--text: #1e293b;
+	--text-light: #64748b;
+	--border: #e2e8f0;
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+	font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	background-color: var(--bg);
+	color: var(--text);
+	padding: 40px 20px;
+	margin: 0;
+}
+
+.booking-app {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+/* Formularz i Grupy Pól */
+.appointment-form {
+	background: var(--card);
+	padding: 24px;
+	border-radius: 16px;
+	box-shadow: var(--shadow-lg);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin-bottom: 40px;
+	align-items: flex-start;
+}
+
+.appointment-form__field-group {
+	flex: 1;
+	min-width: 180px;
+	position: relative; /* Ważne dla pozycjonowania sugestii */
+}
+
+.appointment-form__input {
+	width: 100%;
+	padding: 12px 16px;
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	font-size: 14px;
+	transition: all 0.2s ease;
+	box-sizing: border-box;
+}
+
+.appointment-form__input:focus {
+	outline: none;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Lista Sugestii (Dropdown) */
+.appointment-form__suggestions {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background: white;
+	margin: 4px 0 0 0;
+	padding: 0;
+	list-style: none;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	box-shadow: var(--shadow-lg);
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+/* Ukryj sugestie, gdy są puste */
+.appointment-form__suggestions:empty {
+	display: none;
+}
+
+.appointment-form__suggestion-item {
+	padding: 10px 16px;
+	font-size: 13px;
+	cursor: pointer;
+	transition: background 0.2s;
+	border-bottom: 1px solid #f8fafc;
+}
+
+.appointment-form__suggestion-item:last-child {
+	border-bottom: none;
+}
+
+.appointment-form__suggestion-item:hover {
+	background-color: #f1f5f9;
+	color: var(--primary);
+}
+
+.appointment-form__submit {
+	background-color: var(--primary);
+	color: white;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 10px;
+	font-weight: 600;
+	cursor: pointer;
+	height: 45px;
+	transition: background 0.2s;
+}
+
+.appointment-form__submit:hover {
+	background-color: var(--primary-dark);
+}
+
+/* Lista Rezerwacji */
+.appointment-list {
+	list-style: none;
+	padding: 0;
+	background: var(--card);
+	border-radius: 16px;
+	box-shadow: var(--shadow-lg);
+	overflow: hidden;
+}
+
+.appointment-list__item {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1.5fr 1fr 0.8fr 80px; /* 80px na przycisk */
+	padding: 12px 24px;
+	border-bottom: 1px solid var(--border);
+	align-items: center;
+	gap: 10px;
+}
+
+.appointment-list__delete-btn {
+	background-color: transparent;
+	color: #ef4444; /* Czerwony kolor "Danger" */
+	border: 1px solid #fee2e2;
+	padding: 6px 12px;
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	text-transform: uppercase;
+}
+
+.appointment-list__delete-btn:hover {
+	background-color: #ef4444;
+	color: white;
+	border-color: #ef4444;
+	box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.appointment-list__delete-btn:active {
+	transform: scale(0.95);
+}
+
+.appointment-list__item--header {
+	background-color: #f8fafc;
+	font-weight: 700;
+	color: var(--text-light);
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.appointment-list__item:not(.appointment-list__item--header):hover {
+	background-color: #fafafa;
+}
+
+.appointment-list__data {
+	font-size: 14px;
+}
+
+.appointment-list__data--email {
+	color: var(--text-light);
+}
+
+.appointment-list__data--time {
+	font-weight: 600;
+	color: var(--primary);
+}
+
+.error-summary {
+	background-color: #fef2f2; /* Bardzo jasny czerwony */
+	border: 1px solid #fee2e2;
+	border-left: 4px solid #ef4444; /* Wyraźny czerwony pasek z boku */
+	border-radius: 12px;
+	padding: 16px 20px;
+	margin: 0 0 32px 0; /* Odstęp od formularza i listy pod spodem */
+	list-style: none;
+	box-shadow: 0 2px 4px rgba(239, 68, 68, 0.05);
+}
+
+.error-summary__item {
+	color: #b91c1c; /* Ciemniejszy czerwony dla czytelności tekstu */
+	font-size: 14px;
+	font-weight: 500;
+	padding: 4px 0;
+	display: flex;
+	align-items: center;
+}
+
+.error-summary__item::before {
+	content: '•';
+	color: #ef4444;
+	font-weight: bold;
+	display: inline-block;
+	width: 1em;
+	margin-right: 8px;
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.error-summary {
+	animation: slideIn 0.3s ease-out;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+	.appointment-form {
+		flex-direction: column;
+	}
+	.appointment-form__field-group,
+	.appointment-form__submit {
+		width: 100%;
+	}
+	.appointment-list__item {
+		grid-template-columns: 1fr 1fr; /* Na komórkach zostajemy przy 2 kolumnach */
+		gap: 12px;
+		padding: 20px;
+	}
+	.appointment-list__item--header {
+		display: none;
+	}
+	.appointment-list__delete-btn {
+		grid-column: span 2; /* Przycisk zajmuje całą szerokość na dole wiersza */
+		width: 100%;
+		padding: 10px;
+		margin-top: 8px;
+	}
 }

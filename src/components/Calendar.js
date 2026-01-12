@@ -41,7 +41,7 @@ class Calendar extends React.Component {
 	render() {
 		const { errors, meetings, formKey } = this.state;
 		return (
-			<>
+			<div className="booking-app">
 				{' '}
 				{errors.length > 0 && <Errors errors={errors} />}
 				<CalendarForm
@@ -51,7 +51,7 @@ class Calendar extends React.Component {
 					errors={errors}
 				/>
 				<CalendarList meetings={meetings} />
-			</>
+			</div>
 		);
 	}
 }
