@@ -20,6 +20,14 @@ const CalendarList = ({ meetings, deleteHandler }) => {
 	return (
 		<>
 			<ul className="booking-app__list appointment-list">
+				<li className="appointment-list__item appointment-list__item--header">
+					<span>Imię</span>
+					<span>Nazwisko</span>
+					<span>E-mail</span>
+					<span>Data</span>
+					<span>Godzina</span>
+					<span></span>
+				</li>
 				{meetings.map((meeting) => (
 					<CalendarItem
 						key={'calendar-item-' + meeting.id}

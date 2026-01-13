@@ -38,8 +38,16 @@ class Calendar extends React.Component {
 	state = { errors: [], meetings: [], formKey: Math.random() };
 
 	componentDidMount() {
-		loadMeetingsList(this);
+		loadMeetingsList((state) => this.setState(state));
 	}
+
+	submitHandler = (e, fields, data) => {
+		submitMeeting(e, fields, data, (state) => this.setState(state));
+	};
+
+	deleteHandler = (id) => {
+		deleteMeeting(id, (state) => this.setState(state));
+	};
 
 	render() {
 		const { errors, meetings, formKey } = this.state;
@@ -49,13 +57,10 @@ class Calendar extends React.Component {
 				<CalendarForm
 					key={formKey}
 					fields={this.formFields}
-					submitHandler={submitMeeting.bind(this)}
+					submitHandler={this.submitHandler}
 					errors={errors}
 				/>
-				<CalendarList
-					meetings={meetings}
-					deleteHandler={deleteMeeting.bind(this)}
-				/>
+				<CalendarList meetings={meetings} deleteHandler={this.deleteHandler} />
 			</div>
 		);
 	}

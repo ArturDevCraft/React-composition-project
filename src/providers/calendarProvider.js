@@ -1,26 +1,26 @@
 import CalendarApi from './calendarApi';
 const api = new CalendarApi();
 
-export async function submitMeeting(e, fields, data) {
+export async function submitMeeting(e, fields, data, setState) {
 	e.preventDefault();
 	const errors = validate(e, fields);
 	if (errors === null) {
-		this.setState({ errors: [], formKey: Math.random() });
+		setState({ errors: [], formKey: Math.random() });
 		try {
 			const newMeeting = await api.add(data);
-			updateMeetingsState(this, 'add', newMeeting);
+			updateMeetingsState(setState, 'add', newMeeting);
 		} catch (err) {
 			alert(err);
 		}
 	} else {
-		this.setState({ errors: errors });
+		setState({ errors: errors });
 	}
 }
 
-export async function deleteMeeting(id) {
+export async function deleteMeeting(id, setState) {
 	try {
 		await api.delete(id);
-		updateMeetingsState(this, 'delete', id);
+		updateMeetingsState(setState, 'delete', id);
 	} catch (err) {
 		alert(err);
 	}
@@ -43,10 +43,10 @@ export async function getFieldHints(field, like) {
 	}
 }
 
-export async function loadMeetingsList(component) {
+export async function loadMeetingsList(setState) {
 	try {
 		const meetingsList = await api.get();
-		component.setState({ meetings: meetingsList });
+		setState({ meetings: meetingsList });
 	} catch (err) {
 		alert(err);
 	}
@@ -56,15 +56,15 @@ function isValueLike(value, like) {
 	return value.toLowerCase().includes(like.toLowerCase());
 }
 
-function updateMeetingsState(component, operation, data) {
+function updateMeetingsState(setState, operation, data) {
 	if (operation === 'add') {
-		component.setState((state) => {
+		setState((state) => {
 			return { meetings: [...state.meetings, { ...data }] };
 		});
 	}
 
 	if (operation === 'delete') {
-		component.setState((state) => {
+		setState((state) => {
 			const newState = [...state.meetings];
 			const filtred = newState.filter((item) => item.id !== data);
 			return { meetings: [...filtred] };
