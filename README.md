@@ -10,32 +10,34 @@
 
 ### funkcjonalności programu
 
--
+- zoptymalizowane aktualizowanie stanu lokalnego po dodaniu elementu -  zamiast odpytywać serwer i aktualizować cały stan jest aktualizowan tylko zmienione pole 
+
 
 ### problemy i ich rozwiązania + fragmenty kodu
-- problem z wywołaniem setState w zewnętrznym pliku calendarProvider:
-  w przypadku callback zastosowanie przekazanie callback do `this.setState`:
+- problem z wywołaniem setState w funkcjach wykonawczych które są przekazywane do komponentów podrzędnych:
+  użycie funkcji strzałkowej - pozwala zachować kontekst this
 
 - problem z resetowaniem pól formularza calendarForm
   ROZWIĄZANIE: do danie dla komponentu calendarForm key i zmienianie go zawsze kiedy dane zostaną prawidlowo dodane
 
 ```
-submitHandler = (e, fields, data) => {
-		submitMeeting(e, fields, data, (state) => this.setState(state));
-	};
-<CalendarForm
-					key={formKey}
-					fields={this.formFields}
-					submitHandler={this.submitHandler}
-					errors={errors}
-				/>
 ...
-export async function submitMeeting(e, fields, data, setState) {
-	e.preventDefault();
-	const errors = validate(e, fields);
-	if (errors === null) {
-		setState({ errors: [], formKey: Math.random() }); 
-        (...)
+	<CalendarForm
+			key={formKey}
+			fields={this.formFields}
+			submitHandler={this.submitMeeting}
+			errors={errors}
+	/>
+...
+```
+
+```
+...
+	submitMeeting = async (e, data) => {
+...
+			this.setState({ errors: [], formKey: Math.random() });
+...
+	};
 ```
 
 
@@ -47,7 +49,8 @@ export async function submitMeeting(e, fields, data, setState) {
 
 ### reużywalne części projektu
 
--
+- funkcje validując
+- funkcje wysyłające dane do serwera 
 
 ### narzędzia, frameworki, biblioteki
 

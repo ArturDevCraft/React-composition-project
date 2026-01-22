@@ -13,7 +13,6 @@ class CalendarApi {
 		return this.query('GET', this.url + parameters);
 	}
 
-
 	add(data) {
 		return this.query('POST', this.url, data);
 	}

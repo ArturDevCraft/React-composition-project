@@ -2,11 +2,8 @@ import React from 'react';
 import CalendarForm from './CalendarForm';
 import CalendarList from './CalendarList';
 import Errors from './Errors';
-import {
-	submitMeeting,
-	loadMeetingsList,
-	deleteMeeting,
-} from '../providers/calendarProvider';
+import { validate } from '../helpers/calendarHelper';
+import CalendarApi from '../providers/calendarApi';
 
 class Calendar extends React.Component {
 	formFields = [
@@ -37,17 +34,51 @@ class Calendar extends React.Component {
 
 	state = { errors: [], meetings: [], formKey: Math.random() };
 
+	api = new CalendarApi();
+
+	loadMeetingsList = async () => {
+		try {
+			const meetingsList = await this.api.get();
+			this.setState({ meetings: meetingsList });
+		} catch (err) {
+			alert(err);
+		}
+	};
+
+	submitMeeting = async (e, data) => {
+		e.preventDefault();
+		const errors = validate(e, this.formFields);
+		if (errors === null) {
+			this.setState({ errors: [], formKey: Math.random() });
+			try {
+				const newMeeting = await this.api.add(data);
+				this.setState((state) => {
+					return { meetings: [...state.meetings, { ...newMeeting }] };
+				});
+			} catch (err) {
+				alert(err);
+			}
+		} else {
+			this.setState({ errors: errors });
+		}
+	};
+
+	deleteMeeting = async (id) => {
+		try {
+			await this.api.delete(id);
+			this.setState((state) => {
+				const newState = [...state.meetings];
+				const filtred = newState.filter((item) => item.id !== id);
+				return { meetings: [...filtred] };
+			});
+		} catch (err) {
+			alert(err);
+		}
+	};
+
 	componentDidMount() {
-		loadMeetingsList((state) => this.setState(state));
+		this.loadMeetingsList();
 	}
-
-	submitHandler = (e, fields, data) => {
-		submitMeeting(e, fields, data, (state) => this.setState(state));
-	};
-
-	deleteHandler = (id) => {
-		deleteMeeting(id, (state) => this.setState(state));
-	};
 
 	render() {
 		const { errors, meetings, formKey } = this.state;
@@ -57,10 +88,10 @@ class Calendar extends React.Component {
 				<CalendarForm
 					key={formKey}
 					fields={this.formFields}
-					submitHandler={this.submitHandler}
+					submitHandler={this.submitMeeting}
 					errors={errors}
 				/>
-				<CalendarList meetings={meetings} deleteHandler={this.deleteHandler} />
+				<CalendarList meetings={meetings} deleteHandler={this.deleteMeeting} />
 			</div>
 		);
 	}
