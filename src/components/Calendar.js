@@ -3,7 +3,7 @@ import CalendarForm from './CalendarForm';
 import CalendarList from './CalendarList';
 import Errors from './Errors';
 import { validate } from '../helpers/calendarHelper';
-import CalendarApi from '../providers/calendarApi';
+import CalendarApi from '../providers/CalendarApi';
 
 class Calendar extends React.Component {
 	formFields = [

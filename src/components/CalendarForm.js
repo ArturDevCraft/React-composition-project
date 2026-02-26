@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { isValueLike } from '../helpers/calendarHelper';
 import CalendarHints from './CalendarHints';
-import CalendarApi from '../providers/calendarApi';
+import CalendarApi from '../providers/CalendarApi';
 
 const CalendarForm = ({ fields, submitHandler, errors }) => {
 	const initialValues = Object.fromEntries(
